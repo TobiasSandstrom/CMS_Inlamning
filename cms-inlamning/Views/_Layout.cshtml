@@ -1,0 +1,30 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewData["PageDescription"]" />
+	<meta name="author" content="Tobias Sandström" />
+	
+	<script src="https://kit.fontawesome.com/41c8b474e2.js" crossorigin="anonymous"></script>
+	<link href="~/css/style.css" rel="stylesheet">
+	
+	<script defer src="~/scripts/script.js"></script>
+ 
+	<title>@ViewData["PageTitle"] | Fixxo.</title>
+</head>
+<body>
+    
+    
+	<partial name="_NavbarPartial" />
+	@RenderBody()
+	<partial name="_FooterPartial" />
+
+</body>
+</html>

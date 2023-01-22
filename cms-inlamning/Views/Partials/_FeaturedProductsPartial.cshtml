@@ -1,0 +1,75 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+    
+@{
+	var selection = Umbraco.Content(Guid.Parse("3fcec5ae-d22c-4444-a0af-9061d1e56aee"))
+    .ChildrenOfType("productItemPage")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate);
+    int count = 0;
+    int amount = @Convert.ToInt32(Model.Value("featuredProductsNumber"));
+}
+@*<ul>
+	
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+	}
+</ul>*@
+
+
+
+    <div class="featured">
+        <h3>Featured Products</h3>
+        <div class="featured-container">
+           
+            @foreach (var item in selection) {
+                count++;
+                int stars = Convert.ToInt32(item.Value("productRating"));
+                
+                
+                <a class="item-card-navlink" href="@item.Url()" >
+            
+                    <div class="item-card">
+                        <div class="item-img-container">
+                            <img src="@item.Value("productImage")" alt="" />
+                            <div class="quick-view-hover-content">
+    
+                                <div class="quick-view-hover-icons">
+                                    <ul>
+                                        <li><i class="fa-regular fa-heart"></i></li>
+                                        <li><i class="fa-solid fa-code-compare"></i></li>
+                                        <li><i class="fa-regular fa-bag-shopping"></i></li>
+                                    </ul>
+    
+                                </div>
+    
+                                <div class="quick-view-btn">
+                                    <div class="quick-view-inner-btn">
+                                        <p>QUICK VIEW</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="item-text-container">
+                            <small class='item-category'>@item.Value("productCategory")</small>
+                            <p class='item-name'>@item.Value("productName")</p>
+                            <p class='item-rating'>
+                                @for(int i = 0; i < stars; i++){
+                                        
+                                        <i class="fa-solid fa-star"></i>
+                                    
+                                    }
+                                
+                            </p>
+                            <p class='item-price'>$ @item.Value("productPrice")</p>
+                        </div>
+                    </div>
+                </a>
+                
+                if(count >= amount) break;
+            }
+        </div>
+
+    </div>
